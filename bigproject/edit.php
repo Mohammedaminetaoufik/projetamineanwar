@@ -13,15 +13,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
-    <title>Change Profile</title>
+    <title>Changer Profile</title>
 </head>
-<body>
-    <div class="nav">
+<style>
+    body{
+        background-color:rgb(217, 217, 217);
+    }
+    .btnre {
+    height: 30px;
+    margin-left: ;
+    background: rgb(69, 230, 255);
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all .3s;
+    width: 100%;
+    padding: 0px 10px;
 
-        <div class="right-links">
-            <a href="clientpage.php"> <button class="btn">revenir</button> </a>
-        </div>
-    </div>
+}
+.btnre:hover {
+    background: white;
+    color: black;
+    transition: all .3s;
+}
+
+</style>
+<body>
+
     <div class="container">
         <div class="box form-box">
             <?php 
@@ -105,7 +125,7 @@
                     <input type="submit" class="btn" name="submit" value="Changer" required>
                 </div>
                 
-            </form>
+            </form><a href="clientpage.php"> <button class="btnre">revenir</button> </a>
         </div>
         <?php } ?>
       </div>

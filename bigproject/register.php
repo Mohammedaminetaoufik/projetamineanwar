@@ -68,7 +68,7 @@
             $result = $user->registerUser($username, $email, $age, $tele, $password);
         
             echo "<div class='message'><p>$result</p></div> <br>";
-            echo "<a href='javascript:self.history.back()'><button class='btn'>Revenir</button>";
+            echo "<a href='login.php'><button class='btn'>Sign In</button>";
         } else {
          
         ?>

@@ -27,6 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LWEM equipements</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
@@ -205,6 +206,54 @@ button i{
     background-color: #874f00;
 }
 
+#service {
+    padding: 170px;
+    background-color: #ffffff;
+     
+}
+
+#service h1 {
+    position: relative;
+    font-size: 50px;
+    text-transform: uppercase;
+    color: #222;
+    letter-spacing: 1px;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    color: rgb(0, 0, 0);
+}
+
+#service h1 span {
+    font-size: 150px;
+    display: grid;
+    grid-template-columns: 1.4fr max-content 1fr;
+    grid-template-rows: 19px;
+}
+
+#service h1 span:after,
+#service h1 span:before {
+    content: " ";
+    display: block;
+    border-bottom: 1px solid #ff9500;
+    border-top: 1px solid #ff9500;
+    height: 5px;
+    background-color: #fcd9a9;
+}
+
+#service p {
+    font-size: 25px;
+    color: #222;
+    line-height: 1.5;
+    font-family: "Playfair Display", serif;
+    margin-bottom: 20px;
+    font-weight: 600;
+    
+}
+#service p i{
+    color:rgb(255, 170, 0);
+    font-size: 50px;
+    margin-right: 20px;
+}
     
 footer {
             overflow: hidden;
@@ -318,6 +367,32 @@ footer {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     transition: 0.2s ease-in-out;
     }
+    #service {
+    padding: 50px; 
+  }
+
+  #service h1 {
+    font-size: 30px;
+  }
+
+  #service h1 span {
+    font-size: 80px; 
+  }
+
+  #service h1 span:after,
+  #service h1 span:before {
+    height: 3px; 
+  }
+
+  #service p {
+    font-size: 13px; 
+    margin-bottom: 10px; 
+  }
+
+  #service p i {
+    font-size: 30px; 
+    margin-right: 10px; 
+  }
     button#mobile-menu-button {
         display: block; 
         margin-left:20px;;
@@ -336,7 +411,7 @@ footer {
       
    nav.show {
     opacity: 1;
-    max-height: 330px; 
+    max-height: 340px; 
      }
     footer {
         flex-direction: row; 
@@ -349,6 +424,7 @@ footer {
         margin-bottom: 0; 
         font-size: 14PX;
         padding: 14px 1px;
+        
     }
     footer ul h1 {
             font-size: 20px;
@@ -395,7 +471,7 @@ footer {
     <nav id="navbar">
         <a href="#about">Qui Nous</a>
         <a href="productpage.php">Nos Produits</a>
-        <a href="#services">Nos Services</a>
+        <a href="#service">Nos Services</a>
         <a href="#contact">Contactez Nous</a>
         <a href="php/logout.php">Log Out</a>
         <a href="edit.php">Changer de Profile</a>
@@ -410,12 +486,22 @@ footer {
            <p> Depuis notre création, nous nous sommes engagés à offrir à nos clients une expérience exceptionnelle en matière de technologie et d'équipement de qualité.</p>
            <br><a href="productpage.php">Nos Produit</a>
    </div>
+
+
+   <div id="service">
+   <h1>Nos Services? <br><br><span></span></h1>
+   <p><i class="fa fa-clock"></i>   HORAIRES DE 9H À 22H</p>
+   <p><i class="fa fa-award"></i>   GARANTIES PRODUITS</p>
+   <p><i class="fa fa-money-bill"></i>   RETOURS ET REMBOURSEMENT</p>
+   <p><i class="fa fa-truck"></i>   LIVRAISON ET INSTALLATION</p>
+
+   </div>
     
    <footer>
      <ul>
         <li><a href="#about">Qui nous</a></li>
         <li><a href="productpage.php">Nos produit</a></li>
-        <li><a href="">Nos service</a></li>
+        <li><a href="#service">Nos service</a></li>
         <li><a href="">Contactez nous</a></li>
      </ul>
       <ul>

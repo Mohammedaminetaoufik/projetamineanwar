@@ -1,16 +1,14 @@
 <?php
-    include("../php/config.php");
-    
-    if(isset($_POST['upload']))
-    {
-       
-        $ProductName = $_POST['p_name'];
-        $desc= $_POST['p_desc'];
-        $price = $_POST['p_price'];
-        $category = $_POST['category'];
-       
-            
-        $name = $_FILES['file']['name'];
+include("../php/config.php");
+
+if (isset($_POST['upload'])) {
+    $ProductName = mysqli_real_escape_string($conn, $_POST['p_name']);
+    $desc = mysqli_real_escape_string($conn, $_POST['p_desc']);
+    $price = mysqli_real_escape_string($conn, $_POST['p_price']);
+    $quantity = mysqli_real_escape_string($conn, $_POST['p_quantity']);
+    $category = mysqli_real_escape_string($conn, $_POST['category']);
+
+    $name = $_FILES['file']['name'];
     $temp = $_FILES['file']['tmp_name'];
 
     $location = "./uploads/";
@@ -28,15 +26,13 @@
     move_uploaded_file($temp, $finalImage);
 
     $insert = mysqli_query($conn, "INSERT INTO product
-        (product_name,product_image,price,product_desc,category_id) 
-        VALUES ('$ProductName','$image',$price,'$desc','$category')");
+        (product_name, product_image, price, product_desc, quantity, category_id) 
+        VALUES ('$ProductName', '$image', $price, '$desc', '$quantity', '$category')");
 
     if (!$insert) {
         echo mysqli_error($conn);
     } else {
         echo "Records added successfully.";
     }
-     
-    }
-        
+}
 ?>

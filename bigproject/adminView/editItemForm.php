@@ -28,6 +28,10 @@
       <input type="number" class="form-control" id="p_price" value="<?=$row1['price']?>">
     </div>
     <div class="form-group">
+      <label for="quantity">quantity:</label>
+      <input type="number" class="form-control" id="p_quantity" value="<?=$row1['quantity']?>">
+    </div>
+    <div class="form-group">
       <label>Category:</label>
       <select id="category">
         <?php

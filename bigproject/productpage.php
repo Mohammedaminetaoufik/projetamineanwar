@@ -6,7 +6,7 @@ if(!isset($_SESSION['valid'])){
     header("Location: login.php");
    }
 
-// Fetch categories
+
 $categorySql = "SELECT * FROM category";
 $categoryResult = $conn->query($categorySql);
 
@@ -29,6 +29,10 @@ if ($categoryResult->num_rows > 0) {
         }
     }
 }
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -88,8 +92,8 @@ header p {
     font-family: 'Poppins', sans-serif;
     color: black;
     margin-top: 2px;
-    font-size: larger;
-    text-decoration: underline;
+    font-size: 30px;
+   
 }
         header b{
             color: rgb(0, 204, 255);
@@ -161,10 +165,23 @@ button i{
         #produit h1 {
         margin-left:10px;
         text-align:left;
-       
+       }
 
+       #produit a{
+        background-color: #ff9500;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    cursor:pointer;
+    box-shadow: #222;
+    transition: 0.2s ease-in-out;
+       }
 
-        }
+       #produit a:hover {
+        background-color: #ffffff;
+    color: #ff9500;
+       }
 
     .card {
         width: 400px;
@@ -454,7 +471,7 @@ button i{
         <div class="logodiv">
              <img src="uploads/logo.png" style="width: 100px;" alt=""><h1>LWEM.<span>equipements</span></h1>
         </div>
-        <a href="#" onclick="openCart()"><i class="fa fa-shopping-bag"></i></a>
+        <P> <a href="wishlist.php"><i class="fa fa-shopping-bag"></i></a><br>votre panier</P>
 </header>
 
 
@@ -491,7 +508,8 @@ button i{
                                         <h5 class="card-title"><?= $product['product_name'] ?></h5>
                                         <p class="card-text"><?= $product['product_desc'] ?></p>
                                         <p class="card-text-2"><strong><?= $product['price'] ?> DH</strong></p>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        <p class="card-text">stock :<strong><?= $product['quantity'] ?> unite</strong></p>
+                                        <a href="wishlist.php?action=add&product_id=<?= $product['product_id'] ?>&product_name=<?= urlencode($product['product_name']) ?>" class="btn btn-secondary">ajouter au panier</a>
                                     </div>
                                   
                                 </div>

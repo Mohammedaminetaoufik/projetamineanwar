@@ -21,16 +21,7 @@ function showCategory() {
         }
     });
 }
-function showSizes() {
-    $.ajax({
-        url: "./adminView/viewSizes.php",
-        method: "post",
-        data: { record: 1 },
-        success: function (data) {
-            $('.allContent-section').html(data);
-        }
-    });
-}
+
 function showProductSizes() {
     $.ajax({
         url: "./adminView/viewProductSizes.php",
@@ -108,6 +99,7 @@ function addItems() {
     var p_name = $('#p_name').val();
     var p_desc = $('#p_desc').val();
     var p_price = $('#p_price').val();
+    var p_quantity=$('#p_quantity').val();
     var category = $('#category').val();
     var upload = $('#upload').val();
     var file = $('#file')[0].files[0];
@@ -116,6 +108,7 @@ function addItems() {
     fd.append('p_name', p_name);
     fd.append('p_desc', p_desc);
     fd.append('p_price', p_price);
+    fd.append('p_quantity', p_quantity);
     fd.append('category', category);
     fd.append('file', file);
     fd.append('upload', upload);
@@ -126,8 +119,8 @@ function addItems() {
         processData: false,
         contentType: false,
         success: function (data) {
+            console.log(data); 
             alert('Product Added successfully.');
-            
             showProductItems();
         }
     });
@@ -151,6 +144,7 @@ function updateItems() {
     var p_name = $('#p_name').val();
     var p_desc = $('#p_desc').val();
     var p_price = $('#p_price').val();
+    var p_quantity =$('#p_quantity').val();
     var category = $('#category').val();
     var existingImage = $('#existingImage').val();
     var newImage = $('#newImage')[0].files[0];
@@ -159,6 +153,7 @@ function updateItems() {
     fd.append('p_name', p_name);
     fd.append('p_desc', p_desc);
     fd.append('p_price', p_price);
+    fd.append('p_quantity', p_quantity);
     fd.append('category', category);
     fd.append('existingImage', existingImage);
     fd.append('newImage', newImage);
@@ -199,7 +194,7 @@ function deletCustomers(id) {
         data: { record: id },
         success: function (data) {
             alert('costumer deleted');
-            $('form').trigger('reset');
+            
             showCustomers();
 
         }
@@ -215,7 +210,7 @@ function cartDelete(id) {
         data: { record: id },
         success: function (data) {
             alert('Cart Item Successfully deleted');
-            $('form').trigger('reset');
+           
             showMyCart();
         }
     });
@@ -248,19 +243,8 @@ function categoryDelete(id) {
     });
 }
 
-//delete size data
-function sizeDelete(id) {
-    $.ajax({
-        url: "./controller/deleteSizeController.php",
-        method: "post",
-        data: { record: id },
-        success: function (data) {
-            alert('Size Successfully deleted');
-            
-            showSizes();
-        }
-    });
-}
+
+
 
 
 //delete variation data
@@ -290,31 +274,7 @@ function variationEditForm(id) {
 }
 
 
-//update variation after submit
-function updateVariations() {
-    var v_id = $('#v_id').val();
-    var product = $('#product').val();
-    var size = $('#size').val();
-    var qty = $('#qty').val();
-    var fd = new FormData();
-    fd.append('v_id', v_id);
-    fd.append('product', product);
-    fd.append('size', size);
-    fd.append('qty', qty);
 
-    $.ajax({
-        url: './controller/updateVariationController.php',
-        method: 'post',
-        data: fd,
-        processData: false,
-        contentType: false,
-        success: function (data) {
-            alert('Update Success.');
-            
-            showProductSizes();
-        }
-    });
-}
 function search(id) {
     $.ajax({
         url: "./controller/searchController.php",
