@@ -6,7 +6,7 @@ if(!isset($_SESSION['valid'])){
     header("Location: login.php");
    }
 
-
+   $userId = $_SESSION['id'];
 $categorySql = "SELECT * FROM category";
 $categoryResult = $conn->query($categorySql);
 
@@ -42,7 +42,7 @@ if ($categoryResult->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos Produit</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
-
+    <link rel="icon" type="image/x-icon" href="uploads/logo.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
@@ -81,9 +81,36 @@ header h1 span {
 }
 
 header a {
+    top:10PX;
     margin-right: 20px;
     font-size:60px;
     color:rgb(255, 157, 0);
+    position:relative;
+}
+
+header a span {
+    position:absolute;
+    right:-12px;
+    top: 27px;
+    font-size: 15px;
+    background: #f6b60e;
+    min-width: 15px;
+    min-height: 15px;
+    padding: 2px;
+    line-height: 1.3;
+    color: #fff;
+    font-weight: 400;
+    display: inline-block;
+    text-align: center;
+    max-width: 20px;
+    max-height: 20px;
+    display: block;
+    width: 23px;
+    height: 23px;
+    border-radius: 100%;
+    position: absolute;
+    
+    
 }
 
 header p {
@@ -184,7 +211,7 @@ button i{
        }
 
     .card {
-        width: 400px;
+        width: 350px;
         margin-bottom: 20px;
         border: 1px solid #ced4da;
         border-radius: 8px;
@@ -197,7 +224,7 @@ button i{
     }
 
     .card img {
-        height: 250px;
+        height: 200px;
         object-fit: cover;
     }
 
@@ -206,11 +233,12 @@ button i{
     }
 
     .card-title {
-        font-size: 1.25rem;
-        margin-bottom: 10px;
+        font-size: 1rem;
+        margin-bottom: 8px;
     }
 
     .card-text {
+        font-size: 0.9rem;
         color: black;
         margin-bottom: 15px;
     }
@@ -237,10 +265,10 @@ button i{
     }
         .card {
             margin: 30px;
-            padding:5px;
         }
         .category {
     position: relative;
+    margin:20px;
    
 }
 
@@ -461,17 +489,83 @@ button i{
 }
 }
 .logodiv{
+    margin-left:27px;
     display: flex;
     flex-wrap:nowrap;
 }
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: white; 
+}
+::-webkit-scrollbar-thumb {
+  background: #ff9d14; 
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff9d14; 
+}
+#up {
+  display: inline-block;
+  background-color: rgb(255, 157, 0);
+  color:white;
+  width: 50px;
+  height: 50px;
+  font-size:30px;
+  text-align: center;
+  border-radius: 40px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  visibility: hidden;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  z-index: 100;
+}
+
+#up:hover {
+  cursor: pointer;
+  background-color: #00e1ff;
+}
+#up:active {
+  background-color: #ffffff;
+}
+#up.show {
+  opacity: 1;
+  visibility: visible;
+}
+
     </style>
 </head>
 <body>
+<a id="up"><i class="fa fa-arrow-up"></i></a>
+
 <header>
         <div class="logodiv">
-             <img src="uploads/logo.png" style="width: 100px;" alt=""><h1>LWEM.<span>equipements</span></h1>
+             <a href="clientpage.php"><img src="uploads/logo.png" style="width: 100px;" alt=""></a>
         </div>
-        <P> <a href="wishlist.php"><i class="fa fa-shopping-bag"></i></a><br>votre panier</P>
+        <p>
+    <a href="wishlist.php" >
+        <i class="fa fa-shopping-bag"></i>
+        <span >
+        <?php
+        $sql = "SELECT * from wishlist WHERE user_id = $userId";
+        $result = $conn->query($sql);
+        $count = 0;
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $count = $count + 1;
+            }
+        }
+        echo $count;
+        ?>
+    </span>
+    </a><br>
+    Votre panier
+      </p>
+    
 </header>
 
 
@@ -480,7 +574,7 @@ button i{
     <nav id="navbar">
         <a href="#produit"><i class="fa fa-bars"></i> Nos Category</a>
         <a href="#contact">Contactez Nous</a>
-        <a href="clientpage.php">Revenir</a>
+        <a href="clientpage.php">Qui Nous?</a>
     </nav>
 
 
@@ -505,7 +599,7 @@ button i{
                                     <img src="<?= $product['product_image'] ?>" class="card-img-top"
                                          alt="<?= $product['product_name'] ?>">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $product['product_name'] ?></h5>
+                                        <h5 class="card-title"><strong><?= $product['product_name'] ?></strong></h5>
                                         <p class="card-text"><?= $product['product_desc'] ?></p>
                                         <p class="card-text-2"><strong><?= $product['price'] ?> DH</strong></p>
                                         <p class="card-text">stock :<strong><?= $product['quantity'] ?> unite</strong></p>
@@ -566,24 +660,36 @@ button i{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 <script>
     $(document).ready(function () {
         var swiper = new Swiper('.swiper-about', {
-            slidesPerView: 3,
-            spaceBetween: 1,
+            slidesPerView: 1,
+            spaceBetween: 10,
             loop: true,
             grabCursor: true,
-            
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            
+            breakpoints: {
+                600: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                },
+            }
         });
     });
-
-    
 </script>
 <script>
         
@@ -598,8 +704,6 @@ button i{
     
      </script>
 <script>
-   
-// Wrap every letter in a span
 var textWrapper = document.querySelector('.ml14 .letters');
 textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
@@ -627,6 +731,36 @@ anime.timeline({loop: true})
     easing: "easeOutExpo",
     delay: 1000
   });
+</script>
+<script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+        window.location.hash = hash;
+      });
+    } 
+  });
+});
+</script>
+<script>
+  var btn = $('#up');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 100) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
 </script>
 
 </body>

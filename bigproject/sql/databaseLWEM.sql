@@ -43,7 +43,7 @@ CREATE TABLE orders (
 CREATE TABLE order_details (
     detail_id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT,
-    d_quantity INT,
+    quantity INT,
     price INT,
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
 ) ENGINE=InnoDB;

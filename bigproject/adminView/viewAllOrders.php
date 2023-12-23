@@ -7,7 +7,6 @@
         <th>Customer</th>
         <th>Contact</th>
         <th>OrderDate</th>
-        <th>Payment Method</th>
         <th>Order Status</th>
         <th>Payment Status</th>
         <th>More Details</th>
@@ -26,7 +25,6 @@
           <td><?=$row["delivered_to"]?></td>
           <td><?=$row["phone_no"]?></td>
           <td><?=$row["order_date"]?></td>
-          <td><?=$row["pay_method"]?></td>
            <?php 
                 if($row["order_status"]==0){
                             

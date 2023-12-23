@@ -24,8 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $deleteSql = "DELETE FROM wishlist WHERE user_id = $userId AND wish_id = $wishId";
         $deleteResult = $conn->query($deleteSql);
     }
-
-    // Redirect after handling the form submission
     header("Location: wishlist.php");
     exit();
 }
@@ -42,8 +40,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['product_i
         $insertSql = "INSERT INTO wishlist (user_id, product_id, quantity) VALUES ($userId, $productId, 1)";
         $insertResult = $conn->query($insertSql);
     }
-
-    // Redirect after adding the product to the wishlist
     header("Location: wishlist.php");
     exit();
 }
@@ -60,8 +56,8 @@ $wishlistResult = $conn->query($wishlistSql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Products</title>
-
+    <title>Votre Panier</title>
+    <link rel="icon" type="image/x-icon" href="uploads/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -108,13 +104,32 @@ header a {
 }
 
 header p {
+    background-color: #ff9d14;
+    border-radius: 20px;
+    width: 420px;
+    height: 90px;
     margin-right: 100px;
     font-weight: 900;
     font-family: 'Poppins', sans-serif;
-    color:rgb(0, 174, 255);
-    margin-top: 2px;
+    color: rgb(255, 255, 255);
+    margin-top: 31px;
     font-size: 20px;
-    text-decoration: underline;
+    text-align:center;
+    flex-direction: column; 
+    position:relative;
+}
+header p span a {
+    color: #000;
+    width: 163px;
+    padding: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    background-color: #A6FFFA;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    top: 38px;
+    right: 115px;
+    position: absolute;
 }
 .logodiv{
     display: flex;
@@ -336,7 +351,7 @@ footer {
             position: fixed;
             bottom: 10px;
             right: 5px; 
-            padding: 20px;
+            padding: 20px;z-index: 1000;
         }
         .roundedFixedBtn{
           font-family: 'Poppins', sans-serif;  
@@ -351,14 +366,29 @@ footer {
           text-align: center;
           cursor: pointer;
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+          
         }
 
         .roundedFixedBtn:hover{
             background-color: white;
             color:#ff9d14;
             transition: 0.2s ease-in-out;
-            
         }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: white; 
+}
+::-webkit-scrollbar-thumb {
+  background: #ff9d14; 
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff9d14; 
+}
+
 
 
 
@@ -368,7 +398,7 @@ footer {
 
 <header>
 <div class="logodiv">
-             <img src="uploads/logo.png" style="width: 100px;" alt="">
+      <a href="clientpage.php"><img src="uploads/logo.png" style="width: 100px;" alt=""></a>
         </div>
     <?php
     $totalPrice = 0;
@@ -380,7 +410,8 @@ footer {
     }
     ?>
 
-    <p>Total (TVA incluse):<strong> <?= $totalPrice ?>.00 DH</strong></p>
+    <p>Total (TVA incluse):<strong> <?= $totalPrice ?>.00 DH</strong>
+    <span><a href="">commander</a></span></p>
 </header>
 
 
@@ -434,6 +465,18 @@ footer {
     <?php endif; ?>
 </div>
 
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Order Summary</h2>
+        <div id="orderDetails"></div>
+        <p>Total Price: <span id="totalPrice"></span> DH</p>
+        <p class="success-msg" style="display: none;">Your order was successful!</p>
+        <button id="confirmOrderBtn" onclick="confirmOrder()">Confirm Order</button>
+    </div>
+</div>
+
 <a class="fixedButton" href="productpage.php">
          <div class="roundedFixedBtn"><p>continuer vos achat</p></div>
 </a>
@@ -475,6 +518,7 @@ footer {
      <p>&copy; 2023 - Lwemequipments | Tous les droits sont réservés.</p>
         
      </div>
+
 
 </body>
 </html>

@@ -28,6 +28,8 @@
     <title>LWEM equipements</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="uploads/logo.png">
+
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
@@ -439,13 +441,58 @@ footer {
 }
 }
 .logodiv{
+    margin-left:27px;
     display: flex;
     flex-wrap:nowrap;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: white; 
+}
+::-webkit-scrollbar-thumb {
+  background: #ff9d14; 
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff9d14; 
+}
+#up {
+  display: inline-block;
+  background-color: rgb(255, 157, 0);
+  color:white;
+  width: 50px;
+  height: 50px;
+  font-size:30px;
+  text-align: center;
+  border-radius: 40px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  visibility: hidden;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  z-index: 100;
+}
+
+#up:hover {
+  cursor: pointer;
+  background-color: #00e1ff;
+}
+#up:active {
+  background-color: #ffffff;
+}
+#up.show {
+  opacity: 1;
+  visibility: visible;
 }
 
     </style>
 </head>
 <body>
+<a id="up"><i class="fa fa-arrow-up"></i></a>
           <?php 
             
             $id = $_SESSION['id'];
@@ -462,7 +509,7 @@ footer {
     <header>
         <div class="logodiv">
 
-            <img src="uploads/logo.png" style="width: 100px;" alt=""><h1>LWEM.<span>equipements</span></h1>
+        <a href="clientpage.php"><img src="uploads/logo.png" style="width: 100px;" alt=""></a>
         </div>
         <p><i class="fa fa-user"></i><br><b><?php echo  $res_Uname ?></b></p>
     </header>
@@ -470,8 +517,8 @@ footer {
 
     <nav id="navbar">
         <a href="#about">Qui Nous</a>
-        <a href="productpage.php">Nos Produits</a>
         <a href="#service">Nos Services</a>
+        <a href="productpage.php">Nos Produits</a>
         <a href="#contact">Contactez Nous</a>
         <a href="php/logout.php">Log Out</a>
         <a href="edit.php">Changer de Profile</a>
@@ -523,6 +570,9 @@ footer {
      <p>&copy; 2023 - Lwemequipments | Tous les droits sont réservés.</p>
         
      </div>
+ 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
      <script>
         
         document.addEventListener('DOMContentLoaded', function () {
@@ -535,6 +585,36 @@ footer {
         });
     
      </script>
+     <script>
+$(document).ready(function(){
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 1200, function(){
+        window.location.hash = hash;
+      });
+    } 
+  });
+});
+</script>
+<script>
+  var btn = $('#up');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 100) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '1000');
+});
+</script>
 
 </body>
 </html>

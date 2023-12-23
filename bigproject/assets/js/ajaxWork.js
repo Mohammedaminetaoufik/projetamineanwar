@@ -22,16 +22,6 @@ function showCategory() {
     });
 }
 
-function showProductSizes() {
-    $.ajax({
-        url: "./adminView/viewProductSizes.php",
-        method: "post",
-        data: { record: 1 },
-        success: function (data) {
-            $('.allContent-section').html(data);
-        }
-    });
-}
 
 function showCustomers() {
     $.ajax({
@@ -247,31 +237,9 @@ function categoryDelete(id) {
 
 
 
-//delete variation data
-function variationDelete(id) {
-    $.ajax({
-        url: "./controller/deleteVariationController.php",
-        method: "post",
-        data: { record: id },
-        success: function (data) {
-            alert('Successfully deleted');
-            
-            showProductSizes();
-        }
-    });
-}
 
-//edit variation data
-function variationEditForm(id) {
-    $.ajax({
-        url: "./adminView/editVariationForm.php",
-        method: "post",
-        data: { record: id },
-        success: function (data) {
-            $('.allContent-section').html(data);
-        }
-    });
-}
+
+
 
 
 
