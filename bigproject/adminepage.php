@@ -16,7 +16,7 @@ if(isset($_SESSION['last_activity'])) {
     }
 }
 
-// Update the last activity time whenever there is activity
+
 $_SESSION['last_activity'] = time();
 if(!isset($_SESSION['valid'])){
  header("Location: login.php");
@@ -26,7 +26,7 @@ if(!isset($_SESSION['valid'])){
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin</title>
+  <title>Admin | LWEM</title>
   <link rel="icon" type="image/x-icon" href="uploads/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">

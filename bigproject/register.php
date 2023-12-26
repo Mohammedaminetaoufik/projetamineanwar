@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="uploads/logo.png">
     <link rel="stylesheet" href="style/style.css">
-    <title>Register</title>
+    <title>Registrer | LWEM</title>
     <style>
 .lg{
             margin-top: 7px;

@@ -49,6 +49,13 @@ $wishlistSql = "SELECT w.wish_id, p.product_name, p.product_desc, p.price, p.pro
                 INNER JOIN product p ON w.product_id = p.product_id
                 WHERE w.user_id = $userId";
 $wishlistResult = $conn->query($wishlistSql);
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +63,7 @@ $wishlistResult = $conn->query($wishlistSql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre Panier</title>
+    <title>Votre Panier | LWEM</title>
     <link rel="icon" type="image/x-icon" href="uploads/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
 
@@ -117,24 +124,44 @@ header p {
     text-align:center;
     flex-direction: column; 
     position:relative;
+    box-shadow: 0 7px 6px rgba(0, 0, 0, 0.1);
 }
 header p span a {
-    color: #000;
+    color: white;
     width: 163px;
     padding: 5px;
     font-size: 18px;
     text-decoration: none;
-    background-color: #A6FFFA;
+    background-color: red;
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     top: 38px;
     right: 115px;
     position: absolute;
 }
+header p span a:hover {
+    color:red;
+    transition: all .1s ease-in-out;
+    background:white;
+    text-decoration:none;
+}
 .logodiv{
     display: flex;
     flex-wrap:nowrap;
     margin-left:20px;
+}
+button#mobile-menu-button {
+        display: none; 
+    }
+button{
+    border: none;
+    background-color: transparent;
+    color: #ff9500;
+    margin-left:30px;
+}
+button i{
+    font-size: 30px;
+    cursor: pointer;
 }
 
 nav {
@@ -361,7 +388,7 @@ footer {
           font-size: 1em;
           font-weight:600;
           border-radius: 30%;
-          background-color:#ff9d14 ;
+          background-color:rgb(0, 174, 255) ;
           color: white;
           text-align: center;
           cursor: pointer;
@@ -389,7 +416,141 @@ footer {
   background: #ff9d14; 
 }
 
+@media screen and (max-width: 600px) {
 
+
+    header {
+        position: relative;
+    padding: 5px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+        
+    }
+
+
+    header a {
+        margin-right: 0;
+        font-size: 30px;
+    }
+
+    header p {
+        width: 200px;
+        margin-right: 20px;
+        margin-top: 10px;
+        text-align: center;
+        font-size:14px;
+    }
+
+    header p span a {
+        right: 16px;
+        font-size:12px;
+        top:52px;
+    }
+
+    button#mobile-menu-button {
+        display: block; 
+        margin-left:20px;;
+    }
+         nav {
+        overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    top: 60px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-out;
+      }
+      
+   nav.show {
+    opacity: 1;
+    max-height: 330px; 
+     }
+
+    #wishlist h2{
+        font-size:30px;
+        margin-right: 10px;
+    }
+    .msgpanier{
+        font-size:20px;
+        margin-right: 10px;
+    }
+    .wishlist-item {
+        width: 100%;
+        margin-right: 0;
+    }
+    .wishlist-item h3 {
+    font-size: 1rem;
+}
+
+.wishlist-item p {
+    font-size: 0.8rem; 
+}
+
+    .wishlist-item table {
+        width: 1000px;
+    }
+    .wishlist-item td {
+    vertical-align: top;
+}
+
+  .wishlist-item img {
+    width: 180px;
+    height: 80px;
+}
+.quantity-selector {
+        width: 44px;
+        padding: 2px;
+        font-size: 10px;
+    }
+
+    .quantity-selector:focus {
+        outline: none;
+        border-color: #007bff; 
+    }
+
+    .updatebtn{
+        font-size:10px;
+        margin:10px;
+        margin-top:10px;
+    }
+    .btntrash{
+        font-size:5px;
+        margin:10px;
+    }
+
+   #services{
+    display:none;
+   }
+
+    footer {
+        flex-direction: row; 
+        justify-content: space-between;
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    footer ul {
+        margin-bottom: 0; 
+        font-size: 14PX;
+        padding: 14px 1px;
+    }
+    footer ul h1 {
+            font-size: 20px;
+        }
+
+    footer ul h1 {
+        margin-bottom: 0; 
+    }
+    .logodiv{
+    height:80px; 
+    width: 40px;   
+}
+
+
+}
 
 
     </style>
@@ -407,14 +568,15 @@ footer {
         while ($wishlistItem = $wishlistResult->fetch_assoc()) {
             $totalPrice += $wishlistItem['price'] * $wishlistItem['quantity'];
         }
+        $_SESSION['totalPrice'] = $totalPrice;
     }
     ?>
 
     <p>Total (TVA incluse):<strong> <?= $totalPrice ?>.00 DH</strong>
-    <span><a href="">commander</a></span></p>
+    <span><a href="place_order.php">Commander Votre Panier</a></span></p>
 </header>
 
-
+<button id="mobile-menu-button"> <i class="fa fa-bars"></i></button>
 <nav id="navbar">
 <a href="productpage.php">Continuez vos achats</a>
 <a href="#contact">Contactez Nous</a>
@@ -465,17 +627,7 @@ footer {
     <?php endif; ?>
 </div>
 
-<div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Order Summary</h2>
-        <div id="orderDetails"></div>
-        <p>Total Price: <span id="totalPrice"></span> DH</p>
-        <p class="success-msg" style="display: none;">Your order was successful!</p>
-        <button id="confirmOrderBtn" onclick="confirmOrder()">Confirm Order</button>
-    </div>
-</div>
+
 
 <a class="fixedButton" href="productpage.php">
          <div class="roundedFixedBtn"><p>continuer vos achat</p></div>
@@ -518,6 +670,21 @@ footer {
      <p>&copy; 2023 - Lwemequipments | Tous les droits sont réservés.</p>
         
      </div>
+
+
+     
+     <script>
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            var mobileMenuButton = document.getElementById('mobile-menu-button');
+            var navbar = document.getElementById('navbar');
+
+            mobileMenuButton.addEventListener('click', function () {
+                navbar.classList.toggle('show');
+            });
+        });
+    
+     </script>
 
 
 </body>

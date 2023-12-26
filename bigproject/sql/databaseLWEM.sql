@@ -31,7 +31,6 @@ CREATE TABLE orders (
     user_id INT,
     delivered_to VARCHAR(150) NOT NULL,
     phone_no VARCHAR(10) NOT NULL,
-    deliver_address VARCHAR(255) NOT NULL,
     pay_method VARCHAR(50) NOT NULL,
     pay_status INT NOT NULL,
     order_status INT NOT NULL DEFAULT 0,
@@ -43,9 +42,11 @@ CREATE TABLE orders (
 CREATE TABLE order_details (
     detail_id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT,
+    product_id INT NOT NULL,
     quantity INT,
     price INT,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES product(product_id)
 ) ENGINE=InnoDB;
 
 

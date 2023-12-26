@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
     <link rel="icon" type="image/x-icon" href="uploads/logo.png">
-    <title>Login</title>
+    <title>Login | LWEM</title>
     <style>
         .lg{
             margin-top: 50px;

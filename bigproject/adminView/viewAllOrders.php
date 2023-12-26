@@ -10,6 +10,7 @@
         <th>Order Status</th>
         <th>Payment Status</th>
         <th>More Details</th>
+        <th>Action</th>
      </tr>
     </thead>
      <?php
@@ -50,13 +51,17 @@
                 }
             ?>
               
-        <td><a class="btn btn-primary openPopup" data-href="./adminView/viewEachOrder.php?orderID=<?=$row['order_id']?>" href="javascript:void(0);">View</a></td>
+        
+          <td><a class="btn btn-primary openPopup" data-href="./adminView/viewEachOrder.php?orderID=<?=$row['order_id']?>" href="javascript:void(0);">View</a></td>
+          <td><button class="btn btn-danger" onclick="deleteOrder('<?= $row['order_id'] ?>')">Delete</button></td>        
         </tr>
     <?php
             
         }
       }
     ?>
+
+
      
   </table>
    

@@ -14,11 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="uploads/logo.png">
     <link rel="stylesheet" href="style/style.css">
-    <title>Changer Profile</title>
+    <title>Changer Profile | LWEM</title>
 </head>
 <style>
     body{
-        background-color:rgb(217, 217, 217);
+        background-color: #ff9d14;;
     }
     .btnre {
     height: 30px;
@@ -42,7 +42,7 @@
 
 </style>
 <body>
-
+<BR>
     <div class="container">
         <div class="box form-box">
             <?php 

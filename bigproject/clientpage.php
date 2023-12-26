@@ -436,8 +436,8 @@ footer {
         margin-bottom: 0; 
     }
     .logodiv{
-    height:50px; 
-    width: 50px;   
+    height:80px; 
+    width: 40px;   
 }
 }
 .logodiv{

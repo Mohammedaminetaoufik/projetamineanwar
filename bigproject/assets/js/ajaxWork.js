@@ -191,6 +191,28 @@ function deletCustomers(id) {
     });
 }
 
+function deleteOrder(orderID) {
+    console.log("Deleting order with ID: " + orderID);
+    var confirmation = confirm("Are you sure you want to delete this order?");
+    if (confirmation) {
+        // Send AJAX request to deletorder.php with the orderID
+        $.ajax({
+            type: "POST",
+            url: "deletorder.php",
+            data: { orderID: orderID },
+            success: function (response) {
+                console.log(response); // Log the response for debugging
+                // Handle the response (e.g., refresh the page or update the table)
+                location.reload(); // Reload the page for simplicity
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+}
+
+
 
 //delete cart data
 function cartDelete(id) {

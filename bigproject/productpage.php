@@ -40,7 +40,7 @@ if ($categoryResult->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nos Produit</title>
+    <title>Nos Produit | LWEM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="uploads/logo.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -53,6 +53,9 @@ if ($categoryResult->num_rows > 0) {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
     }
 
     header {
@@ -63,6 +66,7 @@ if ($categoryResult->num_rows > 0) {
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
+    
     
 }
 
@@ -148,6 +152,8 @@ button i{
             font-family: 'Poppins',sans-serif;
             transition: padding 0.3s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            
         }
 
         nav a {
@@ -173,8 +179,6 @@ button i{
     #produit {
         text-align:center;
         font-family: 'Poppins', sans-serif;
-       
-        box-sizing: border-box;
         
     }
     #produit h2 {
@@ -224,12 +228,12 @@ button i{
     }
 
     .card img {
-        height: 200px;
+        height: 280px;
         object-fit: cover;
     }
 
     .card-body {
-        padding: 20px;
+        padding: 15px;
     }
 
     .card-title {
@@ -425,17 +429,32 @@ button i{
     max-height: 0;
     transition: opacity 0.3s ease-out, max-height 0.3s ease-out;
       }
+      nav a{
+        display:none;
+      }
       
    nav.show {
     opacity: 1;
     max-height: 330px; 
      }
+     .dropdown-content {
+        display: block; 
+    }
+    
+    .category {
+    margin:15px;
+   
+}
      .card {
         width: 230px;
+        padding:9px;
     }
+  
 
     .card img {
-        height: 100px; 
+        height: 280px;
+        width:100%; 
+        padding:10px;
     }
 
     .card-title {
@@ -450,12 +469,20 @@ button i{
     .card-text-2 {
         font-size: 15px; 
     }
+    .card-body {
+        padding: 10px;
+    }
     .btn-primary {
         background-color: #ff9d00;
         border: none;
         font-size:10px;
         
     }
+    .btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    line-height: 1;
+}
     #produit .ml14 {
    font-family: 'Poppins', sans-serif;
    color: rgb(0, 174, 255); 
@@ -484,11 +511,12 @@ button i{
         margin-bottom: 0; 
     }
     .logodiv{
-    height:50px; 
-    width: 50px;   
+    height:120px; 
+    width: 40px;   
 }
 }
 .logodiv{
+    height:140px;
     margin-left:27px;
     display: flex;
     flex-wrap:nowrap;
@@ -536,7 +564,39 @@ button i{
   opacity: 1;
   visibility: visible;
 }
+.dropdown {
+    position: relative;
+}
 
+.dropdown a {
+    display: block;
+    color: rgb(255, 157, 0);
+    border: none;
+    text-decoration: overline;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 6px;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: white;
+    text-decoration: none;
+    color: rgb(255, 187, 0);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
     </style>
 </head>
 <body>
@@ -571,14 +631,25 @@ button i{
 
 
     <button id="mobile-menu-button"> <i class="fa fa-bars"></i></button>
+
+    
     <nav id="navbar">
-        <a href="#produit"><i class="fa fa-bars"></i> Nos Category</a>
+    <div class="dropdown">
+    <a href="#" onclick="scrollToCategory(event)"><i class="fa fa-bars"></i> Nos Catégories</a>
+    <div class="dropdown-content">
+        <?php foreach ($productData as $categoryId => $category): ?>
+            <?php if (!empty($category['products'])): ?>
+                <a href="#" onclick="scrollToCategory(event, 'category<?= $categoryId ?>')"><?= $category['category_name'] ?></a>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
         <a href="#contact">Contactez Nous</a>
         <a href="clientpage.php">Qui Nous?</a>
     </nav>
 
+<br><br><br>
 
-<br>
 <div id="produit">
 <h1 class="ml14">
   <span class="text-wrapper">
@@ -588,6 +659,7 @@ button i{
 </h1><br><br>
     <?php foreach ($productData as $categoryId => $category): ?>
         <?php if (!empty($category['products'])): ?>
+            <a name="category<?= $categoryId ?>"></a>
             <div class="category">
                 <h1><i class="fa fa-check"></i> <?= $category['category_name'] ?></h1>
                 
@@ -761,6 +833,20 @@ btn.on('click', function(e) {
   e.preventDefault();
   $('html, body').animate({scrollTop:0}, '300');
 });
+</script>
+<script>
+    function scrollToCategory(event, categoryId) {
+        event.preventDefault();
+
+        
+        const targetElement = document.querySelector(`[name="${categoryId}"]`);
+
+        if (targetElement) {
+
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            
+        }
+    }
 </script>
 
 </body>
