@@ -18,7 +18,7 @@
 </head>
 <style>
     body{
-        background-color: #ff9d14;;
+        background-color: #ff9d14;
     }
     .btnre {
     height: 30px;
@@ -90,7 +90,6 @@
                 $res_Email = $userInfo['Email'];
                 $res_Age = $userInfo['Age'];
                 $res_Tele = $userInfo['tele'];
-                $res_Password = $userInfo['Password'];
             
 
             ?>
@@ -117,8 +116,8 @@
                 </div>
 
                 <div class="field input">
-                    <label for="password">mot de passe</label>
-                    <input type="password" name="password" id="password" value="<?php echo $res_Password; ?>" autocomplete="off" required>
+                    <label for="password">nouveau mot de passe</label>
+                    <input type="password" name="password" id="password"  autocomplete="off" required>
                 </div>
                 
                 <div class="field">

@@ -110,41 +110,6 @@ header a {
     color:rgb(255, 157, 0);
 }
 
-header p {
-    background-color: #ff9d14;
-    border-radius: 20px;
-    width: 420px;
-    height: 90px;
-    margin-right: 100px;
-    font-weight: 900;
-    font-family: 'Poppins', sans-serif;
-    color: rgb(255, 255, 255);
-    margin-top: 31px;
-    font-size: 20px;
-    text-align:center;
-    flex-direction: column; 
-    position:relative;
-    box-shadow: 0 7px 6px rgba(0, 0, 0, 0.1);
-}
-header p span a {
-    color: white;
-    width: 163px;
-    padding: 5px;
-    font-size: 18px;
-    text-decoration: none;
-    background-color: red;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    top: 38px;
-    right: 115px;
-    position: absolute;
-}
-header p span a:hover {
-    color:red;
-    transition: all .1s ease-in-out;
-    background:white;
-    text-decoration:none;
-}
 .logodiv{
     display: flex;
     flex-wrap:nowrap;
@@ -548,8 +513,112 @@ footer {
     height:80px; 
     width: 40px;   
 }
+#prix {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .dropdown {
+        margin-right: 0;
+    }
+
+    .dropdown a {
+        
+    text-decoration: none;
+    padding: 5px 13px;
+    background-color: red;
+    color: #fff;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    width: 100px;
+    text-align: center;
+    right: 0; 
+}
 
 
+}
+
+
+#prix {
+    font-family: 'poppins', sans-serif;
+    margin: 29px;
+    background-color: #FFC14E;
+    border: 1px solid #eaeaea;
+    border-radius: 37px;
+    padding: 26px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#prix strong {
+    color: #333;
+    font-size: 1.8em;
+    margin-top: 20px;
+}
+
+.dropdown {
+    margin-right:71%;
+    
+    
+}
+
+.dropdown a {
+    text-decoration: none;
+    padding: 15px 30px;
+    background-color: red;
+    color: #fff;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    font-size: 1.2em;
+}
+
+.dropdown a:hover {
+    background-color: #fff;
+    color:red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    width: 160px;
+    text-align: center;
+    right: 0; 
+}
+.dropdown-content .oui {
+    background:white;
+    color: #0CC000;
+    padding: 15px;
+    transition: color 0.3s ease;
+}
+.dropdown-content .non {
+    background:white;
+    color: red;
+    padding: 15px;
+    transition: color 0.3s ease;
+}
+.dropdown-content a:hover {
+    color: #555;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 
@@ -560,7 +629,7 @@ footer {
 <header>
 <div class="logodiv">
       <a href="clientpage.php"><img src="uploads/logo.png" style="width: 100px;" alt=""></a>
-        </div>
+</div>
     <?php
     $totalPrice = 0;
 
@@ -572,19 +641,29 @@ footer {
     }
     ?>
 
-    <p>Total (TVA incluse):<strong> <?= $totalPrice ?>.00 DH</strong>
-    <span><a href="place_order.php">Commander Votre Panier</a></span></p>
+
 </header>
 
 <button id="mobile-menu-button"> <i class="fa fa-bars"></i></button>
 <nav id="navbar">
 <a href="productpage.php">Continuez vos achats</a>
 <a href="#contact">Contactez Nous</a>
+<a href="php/logout.php">Log Out</a>
 
 </nav>
 
 
+<div id="prix">
+<p>Total (TVA incluse): <strong><?= $totalPrice ?>.00 DH</strong></p>
+        <div class="dropdown">
+            <a href="#">Commander Votre Panier</a>
+            <div class="dropdown-content">
+                <a href="place_order.php" class="oui">Je Confirme</a>
+                <a href="" class="non">Pas encore</a>
+            </div>
+        </div>
 
+</div>
 
 <div id="wishlist">
     <h2>Mon Panier</h2>

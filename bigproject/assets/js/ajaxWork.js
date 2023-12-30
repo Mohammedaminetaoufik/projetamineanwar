@@ -42,7 +42,11 @@ function setactive(id) {
         method: "post",
         data: { record: id },
         success: function (data) {
-            showCustomers();
+            if (data === "success") {
+                showCustomers(); 
+            } else {
+                alert("Error updating user activity.");
+            }
         }
     });
 }

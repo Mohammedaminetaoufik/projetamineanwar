@@ -529,7 +529,7 @@ footer {
 
            <h1>Qui Nous? <br><br><span></span></h1>
            <p>Bienvenue chez <span>LWEM Equipements</span>,</p>
-           <p> votre partenaire de confiance pour les solutions électroniques innovantes et les équipements de pointe.</p>
+           <p> une entreprise marocaine, fondée en 2019, spécialisée dans le domaine de Climatisation, Ventilation, froid industriel, Chauffage centrale, Cuisine professionnelle, Plomberie Sanitaire, Protection incendie et réseaux d’eau potable .</p>
            <p> Depuis notre création, nous nous sommes engagés à offrir à nos clients une expérience exceptionnelle en matière de technologie et d'équipement de qualité.</p>
            <br><a href="productpage.php">Nos Produit</a>
    </div>

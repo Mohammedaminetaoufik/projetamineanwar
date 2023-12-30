@@ -35,29 +35,37 @@
                     $email = mysqli_real_escape_string($conn,$_POST['email']);
                     $password = mysqli_real_escape_string($conn,$_POST['password']);
 
-                    $result = mysqli_query($conn,"SELECT * FROM users WHERE Email='$email' AND Password='$password' ") or die("Select Error");
+                    $result = mysqli_query($conn, "SELECT * FROM users WHERE Email='$email' AND Password='$password' AND active=1") or die("Select Error");
+
                     $row = mysqli_fetch_assoc($result);
 
-                    if(is_array($row) && !empty($row)){
+                    if (is_array($row) && !empty($row)) {
                         $_SESSION['valid'] = $row['Email'];
                         $_SESSION['username'] = $row['Username'];
                         $_SESSION['age'] = $row['Age'];
                         $_SESSION['tele'] = $row['Tele'];
                         $_SESSION['id'] = $row['Id'];
-
-                        // for admin
+                    
+                        // Check for admin login
                         if ($email === 'admin@gmail.com' && $password === 'admin') {
                             header("Location: adminepage.php");
                             exit(); 
                         } else {
                             header("Location: clientpage.php");
+                            exit();
                         }
+                    } elseif (empty($row)) {
+                        echo "<div class='message'>
+                                <p>Username or password incorrect</p>
+                              </div> <br>";
+                        echo "<a href='login.php'><button class='btn'>Return</button>";
                     } else {
                         echo "<div class='message'>
-                                <p>nom ou mot de passe incorrect</p>
+                                <p>Account not active or incorrect email/password.</p>
                               </div> <br>";
-                        echo "<a href='login.php'><button class='btn'>revenir</button>";
+                        echo "<a href='login.php'><button class='btn'>Return</button>";
                     }
+                    
                 } else {
             ?>
             <header>Login</header>
@@ -79,9 +87,18 @@
                 <div class="links">
                     Vous etes pas un membre ? <a href="register.php">Sign Up Ici</a>
                 </div>
+                <div class="links">
+                    Vous avez oublié votre mot de passe ? <a href="forgot_password.php">Réinitialiser le mot de passe</a>
+                </div>
             </form>
             <?php } ?>
         </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
 </body>
 </html>

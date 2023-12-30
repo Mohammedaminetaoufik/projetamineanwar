@@ -5,7 +5,7 @@ CREATE TABLE users (
     Email VARCHAR(200),
     Age INT,
     tele VARCHAR(10),
-    active BOOLEAN DEFAULT false, 
+    active BOOLEAN DEFAULT true, 
     Password VARCHAR(200)
 ) ENGINE=InnoDB;
 

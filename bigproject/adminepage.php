@@ -32,6 +32,8 @@ if(!isset($_SESSION['valid'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        <link rel="stylesheet" href="./assets/css/style.css"></link>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+
   
 </head>
 <body >
@@ -77,6 +79,7 @@ if(!isset($_SESSION['valid'])){
     <a href="#category"   onclick="showCategory()" ><i class="fa fa-th-large"></i> Category</a>   
     <a href="#products"   onclick="showProductItems()" ><i class="fa fa-th"></i> Products</a>
     <a href="#orders" onclick="showOrders()"><i class="fa fa-list"></i> Orders</a>
+    <a href="clientpage.php"  target="_blank"><i class="fa fa-code"></i> LWEM Site web</a>
 </div>
  
 <div id="main">

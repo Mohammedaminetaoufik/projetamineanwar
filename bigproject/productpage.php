@@ -514,6 +514,25 @@ button i{
     height:120px; 
     width: 40px;   
 }
+.search-form input {
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    margin-right: -21px;
+    font-size: 7px;
+    width: 132px;
+}
+.search-form button {
+    background-color: #ff9d00;
+    color: #fff;
+    border: none;
+    padding: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.search-form button i {
+    font-size:20px;
+}
 }
 .logodiv{
     height:140px;
@@ -597,6 +616,36 @@ button i{
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input {
+    padding: 11px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    margin-right: -18px;
+    font-size: 12px;
+    width: 259px;
+}
+
+.search-form button {
+    background-color: #ff9d00;
+    color: #fff;
+    border: none;
+    padding: 7px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.search-form button i {
+    font-size:28px;
+}
+
+.search-form button:hover {
+    background-color: #ffbd8c;
+}
     </style>
 </head>
 <body>
@@ -606,6 +655,34 @@ button i{
         <div class="logodiv">
              <a href="clientpage.php"><img src="uploads/logo.png" style="width: 100px;" alt=""></a>
         </div>
+<form action="" method="GET" class="search-form">
+    <input type="text" name="search" placeholder="Search for products or categories..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+    <button type="submit"><i class="fa fa-search"></i></button>
+    <?php
+$searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+if (!empty($searchTerm)) {
+    $filteredProductData = [];
+
+    foreach ($productData as $categoryId => $category) {
+        $filteredCategory = [];
+
+        foreach ($category['products'] as $product) {
+            if (stripos($product['product_name'], $searchTerm) !== false || stripos($category['category_name'], $searchTerm) !== false) {
+                $filteredCategory[] = $product;
+            }
+        }
+
+        if (!empty($filteredCategory)) {
+            $filteredProductData[$categoryId]['category_name'] = $category['category_name'];
+            $filteredProductData[$categoryId]['products'] = $filteredCategory;
+        }
+    }
+    $productData = $filteredProductData;
+}
+
+?>
+</form>
+
         <p>
     <a href="wishlist.php" >
         <i class="fa fa-shopping-bag"></i>
@@ -646,6 +723,7 @@ button i{
 </div>
         <a href="#contact">Contactez Nous</a>
         <a href="clientpage.php">Qui Nous?</a>
+        <a href="php/logout.php">Log Out</a>
     </nav>
 
 <br><br><br>

@@ -33,11 +33,13 @@ include("../php/config.php");
                     <td><?php echo isset($row["Email"]) ? $row["Email"] : 'N/A'; ?></td>
                     <td><?php echo isset($row["Age"]) ? $row["Age"] : 'N/A'; ?></td>
                     <td><?php echo isset($row["tele"]) ? $row["tele"] : 'N/A'; ?></td>
-                    <td><button class="btn <?php if ($row["active"]) {
-                                 echo "btn-success";
-                                                 } else {
-                                  echo "btn-danger";
-                        } ?>" style="height:40px" onclick="setactive(<?=$row['Id']?>)"></button></td>
+                    <td><button class="btn <?php if ($row["active"]) { echo "btn-success"; } else { echo "btn-danger"; } ?>"
+                        style="height: 40px" onclick="setactive(<?= $row['Id'] ?>)">
+                      </button></td>
+
+
+                      
+
                     <td><button class="btn btn-danger" style="height:40px" onclick="deletCustomers(<?=$row['Id']?>)">Delete</button></td>
 
                 </tr>

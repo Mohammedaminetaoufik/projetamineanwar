@@ -9,7 +9,7 @@ if (!isset($_SESSION['valid'])) {
 
 $userId = $_SESSION['id'];
 
-// Retrieve user information
+
 $userInfoSql = "SELECT * FROM users WHERE id = ?";
 $stmtUserInfo = $conn->prepare($userInfoSql);
 $stmtUserInfo->bind_param("i", $userId);
@@ -18,10 +18,10 @@ $userInfoResult = $stmtUserInfo->get_result();
 
 if ($userInfoResult->num_rows > 0) {
     $userInfo = $userInfoResult->fetch_assoc();
-    $deliveredTo = $userInfo['Username']; // Replace 'full_name' with the actual column name for the user's name
-    $phoneNo = $userInfo['tele']; // Replace 'phone_number' with the actual column name for the user's phone number
+    $deliveredTo = $userInfo['Username']; 
+    $phoneNo = $userInfo['tele']; 
 
-    // Check if the user has items in the wishlist
+    
     $wishlistSql = "SELECT * FROM wishlist WHERE user_id = ?";
     $stmtWishlist = $conn->prepare($wishlistSql);
     $stmtWishlist->bind_param("i", $userId);
@@ -29,29 +29,29 @@ if ($userInfoResult->num_rows > 0) {
     $wishlistResult = $stmtWishlist->get_result();
 
     if ($wishlistResult->num_rows > 0) {
-        // Create a new order
+        
         $insertOrderSql = "INSERT INTO orders (user_id, delivered_to, phone_no, pay_status) 
                           VALUES (?, ?, ?, ?)";
 
         $stmtOrder = $conn->prepare($insertOrderSql);
         $stmtOrder->bind_param("isss", $userId, $deliveredTo, $phoneNo, $payStatus);
 
-        // Set default values for placeholders
+        
         $payStatus = 0;
 
         $stmtOrder->execute();
 
-        // Get the order ID
+        
         $orderId = $stmtOrder->insert_id;
 
-        // Move items from wishlist to order_details
+        
         $wishlistResult->data_seek(0);
 
         while ($wishlistItem = $wishlistResult->fetch_assoc()) {
             $productId = $wishlistItem['product_id'];
             $quantity = $wishlistItem['quantity'];
 
-            // Check if the product_id exists in the product table
+           
             $checkProductSql = "SELECT COUNT(*) FROM product WHERE product_id = ?";
             $stmtCheckProduct = $conn->prepare($checkProductSql);
             $stmtCheckProduct->bind_param("i", $productId);
